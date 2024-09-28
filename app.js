@@ -1,17 +1,18 @@
-// Import Express
 const express = require('express');
 const app = express();
-
-// Import routes
+const path = require("path");
+const cors = require("cors");
+const uploadRoute = require("./routes/uploadRoute");
 const routes = require('./routes/routes');
 
-// Use the routes
+app.use(cors());
+app.use(express.json());
 app.use('/', routes);
+app.use('/uploads', express.static('uploads'));
+app.use("/", uploadRoute);
 
-// Define a port
-const PORT = 3000;
+const PORT = 4000;
 
-// Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
